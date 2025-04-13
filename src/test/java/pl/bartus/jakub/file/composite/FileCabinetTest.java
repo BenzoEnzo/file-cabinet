@@ -1,0 +1,83 @@
+package pl.bartus.jakub.file.composite;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import pl.bartus.jakub.file.composite.stub.FolderStub;
+import pl.bartus.jakub.file.composite.stub.MultiFolderStub;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class FileCabinetTest {
+
+    private FileCabinet fileCabinet;
+
+    @BeforeEach
+    void setUp() {
+        FolderStub folder1 = new FolderStub("Games", "100MB");
+        FolderStub folder2 = new FolderStub("Pages", "500MB");
+        FolderStub folder3 = new FolderStub("Images", "500MB");
+
+        MultiFolder multiFolder = new MultiFolderStub(
+                "User",
+                "1GB",
+                List.of(folder2, folder3)
+        );
+
+        fileCabinet = new FileCabinet(
+                List.of(
+                        folder2,
+                        folder1,
+                        multiFolder
+                )
+        );
+    }
+
+    @Test
+    void testFindFolderByName_foundAtTopLevel() {
+        Optional<Folder> result = fileCabinet.findFolderByName("Pages");
+        assertTrue(result.isPresent(), "There should find a folder with name 'Pages'");
+        assertEquals("Pages", result.get().getName());
+    }
+
+    @Test
+    void testFindFolderByName_foundNested() {
+        Optional<Folder> result = fileCabinet.findFolderByName("Games");
+        assertTrue(result.isPresent(), "Should find a folder with name 'Games'");
+        assertEquals("Games", result.get().getName());
+    }
+
+    @Test
+    void testFindFolderByName_notFound() {
+        Optional<Folder> result = fileCabinet.findFolderByName("NonExistent");
+        assertFalse(result.isPresent(), "There should be no folders with these name");
+    }
+
+    @Test
+    void testFindFoldersBySize_multipleMatches() {
+        List<Folder> result = fileCabinet.findFoldersBySize("500MB");
+        assertEquals(3, result.size());
+        assertTrue(result.stream().anyMatch(f -> "Pages".equals(f.getName())));
+        assertTrue(result.stream().anyMatch(f -> "Images".equals(f.getName())));
+    }
+
+    @Test
+    void testFindFoldersBySize_singleMatch() {
+        List<Folder> result = fileCabinet.findFoldersBySize("1GB");
+        assertEquals(1, result.size());
+        assertEquals("User", result.get(0).getName());
+    }
+
+    @Test
+    void testFindFoldersBySize_noMatches() {
+        List<Folder> result = fileCabinet.findFoldersBySize("10GB");
+        assertTrue(result.isEmpty(), "There should be no folders with a size of 10GB.");
+    }
+
+    @Test
+    void testCount() {
+        assertEquals(3, fileCabinet.count());
+    }
+}
