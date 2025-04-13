@@ -1,8 +1,8 @@
 package pl.bartus.jakub.file.cabinet;
 
 import lombok.RequiredArgsConstructor;
-import pl.bartus.jakub.file.cabinet.folder.CompositeFolder;
 import pl.bartus.jakub.file.cabinet.folder.Folder;
+import pl.bartus.jakub.file.cabinet.folder.MultiFolder;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +36,10 @@ public class FileCabinet implements Cabinet {
 
     private static Stream<Folder> collectFolders(Folder folder) {
         return Stream.concat(Stream.of(folder),
-                ((CompositeFolder) folder).getFolders()
-                        .stream().flatMap(FileCabinet::collectFolders));
+                folder instanceof MultiFolder multiFolder ?
+                        multiFolder.getFolders()
+                                .stream()
+                                .flatMap(FileCabinet::collectFolders) : Stream.of(folder));
+
     }
 }
