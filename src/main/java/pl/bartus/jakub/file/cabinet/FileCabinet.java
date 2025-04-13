@@ -1,7 +1,6 @@
 package pl.bartus.jakub.file.cabinet;
 
 import lombok.RequiredArgsConstructor;
-import pl.bartus.jakub.file.cabinet.composite.Cabinet;
 import pl.bartus.jakub.file.cabinet.composite.Folder;
 
 import java.util.List;
