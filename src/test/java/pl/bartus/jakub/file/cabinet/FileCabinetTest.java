@@ -1,9 +1,9 @@
-package pl.bartus.jakub.file.composite;
+package pl.bartus.jakub.file.cabinet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.bartus.jakub.file.composite.stub.FolderStub;
-import pl.bartus.jakub.file.composite.stub.MultiFolderStub;
+import pl.bartus.jakub.file.cabinet.composite.Folder;
+import pl.bartus.jakub.file.cabinet.composite.MultiFolder;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,21 +16,21 @@ public class FileCabinetTest {
 
     @BeforeEach
     void setUp() {
-        FolderStub folder1 = new FolderStub("Games", "100MB");
-        FolderStub folder2 = new FolderStub("Pages", "500MB");
-        FolderStub folder3 = new FolderStub("Images", "500MB");
-        FolderStub folder4 = new FolderStub("Videos", "500MB");
+        Folder folder1 = new FolderCabinet("Games", "100MB");
+        Folder folder2 = new FolderCabinet("Pages", "500MB");
+        Folder folder3 = new FolderCabinet("Images", "500MB");
+        Folder folder4 = new FolderCabinet("Videos", "500MB");
 
-        MultiFolder multiFolder = new MultiFolderStub(
+        MultiFolder multiFolder = new FolderCabinet(
                 "User",
                 "1GB",
                 List.of(folder1, folder2, folder3)
         );
 
-        MultiFolder multiFolder2 = new MultiFolderStub(
+        MultiFolder multiFolder2 = new FolderCabinet(
                 "PC",
                 "2GB",
-                List.of(multiFolder,folder4)
+                List.of(multiFolder, folder4)
         );
 
         fileCabinet = new FileCabinet(

@@ -1,10 +1,12 @@
-package pl.bartus.jakub.file.composite;
+package pl.bartus.jakub.file.cabinet.composite;
 
 import java.util.List;
 import java.util.Optional;
 
-interface Cabinet {
+public interface Cabinet {
     Optional<Folder> findFolderByName(String name);
+
     List<Folder> findFoldersBySize(String size);
+
     int count();
 }
