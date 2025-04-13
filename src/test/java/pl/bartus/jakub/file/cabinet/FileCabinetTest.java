@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FileCabinetTest {
 
-    private FileCabinet fileCabinet;
+    private Cabinet fileCabinet;
 
     @BeforeEach
     void setUp() {
