@@ -2,6 +2,7 @@ package pl.bartus.jakub.file.cabinet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.bartus.jakub.file.cabinet.composite.CompositeFolder;
 import pl.bartus.jakub.file.cabinet.composite.Folder;
 import pl.bartus.jakub.file.cabinet.composite.MultiFolder;
 
@@ -16,18 +17,18 @@ public class FileCabinetTest {
 
     @BeforeEach
     void setUp() {
-        Folder folder1 = new FolderCabinet("Games", "100MB");
-        Folder folder2 = new FolderCabinet("Pages", "500MB");
-        Folder folder3 = new FolderCabinet("Images", "500MB");
-        Folder folder4 = new FolderCabinet("Videos", "500MB");
+        Folder folder1 = new CompositeFolder("Games", "100MB");
+        Folder folder2 = new CompositeFolder("Pages", "500MB");
+        Folder folder3 = new CompositeFolder("Images", "500MB");
+        Folder folder4 = new CompositeFolder("Videos", "500MB");
 
-        MultiFolder multiFolder = new FolderCabinet(
+        MultiFolder multiFolder = new CompositeFolder(
                 "User",
                 "1GB",
                 List.of(folder1, folder2, folder3)
         );
 
-        MultiFolder multiFolder2 = new FolderCabinet(
+        MultiFolder multiFolder2 = new CompositeFolder(
                 "PC",
                 "2GB",
                 List.of(multiFolder, folder4)

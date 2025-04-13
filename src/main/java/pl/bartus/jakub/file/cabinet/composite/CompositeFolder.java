@@ -1,12 +1,9 @@
-package pl.bartus.jakub.file.cabinet;
-
-import pl.bartus.jakub.file.cabinet.composite.Folder;
-import pl.bartus.jakub.file.cabinet.composite.MultiFolder;
+package pl.bartus.jakub.file.cabinet.composite;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FolderCabinet implements MultiFolder {
+public class CompositeFolder implements MultiFolder {
     private final String name;
     private final String size;
     private final List<Folder> folders;
@@ -26,13 +23,13 @@ public class FolderCabinet implements MultiFolder {
         return this.size;
     }
 
-    public FolderCabinet(String name, String size) {
+    public CompositeFolder(String name, String size) {
         this.name = name;
         this.size = size;
         this.folders = new ArrayList<>();
     }
 
-    public FolderCabinet(String name, String size, List<Folder> folders) {
+    public CompositeFolder(String name, String size, List<Folder> folders) {
         this.name = name;
         this.size = size;
         this.folders = folders;
