@@ -2,9 +2,9 @@ package pl.bartus.jakub.file.cabinet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.bartus.jakub.file.cabinet.composite.CompositeFolder;
-import pl.bartus.jakub.file.cabinet.composite.Folder;
-import pl.bartus.jakub.file.cabinet.composite.MultiFolder;
+import pl.bartus.jakub.file.cabinet.folder.CompositeFolder;
+import pl.bartus.jakub.file.cabinet.folder.Folder;
+import pl.bartus.jakub.file.cabinet.folder.MultiFolder;
 
 import java.util.List;
 import java.util.Optional;

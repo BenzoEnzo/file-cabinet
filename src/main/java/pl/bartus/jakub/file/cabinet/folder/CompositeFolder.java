@@ -1,4 +1,4 @@
-package pl.bartus.jakub.file.cabinet.composite;
+package pl.bartus.jakub.file.cabinet.folder;
 
 import java.util.ArrayList;
 import java.util.List;
