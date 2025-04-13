@@ -40,6 +40,3 @@ public class FileCabinet implements Cabinet {
                         .stream().flatMap(FileCabinet::collectFolders));
     }
 }
-
-
-
