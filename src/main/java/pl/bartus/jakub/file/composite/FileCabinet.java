@@ -23,7 +23,7 @@ public class FileCabinet implements Cabinet {
 
     @Override
     public int count() {
-        return folders.size();
+       return (int) filter(folder -> true).count();
     }
 
     private Stream<Folder> filter(Predicate<? super Folder> predicate) {

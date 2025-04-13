@@ -19,18 +19,23 @@ public class FileCabinetTest {
         FolderStub folder1 = new FolderStub("Games", "100MB");
         FolderStub folder2 = new FolderStub("Pages", "500MB");
         FolderStub folder3 = new FolderStub("Images", "500MB");
+        FolderStub folder4 = new FolderStub("Videos", "500MB");
 
         MultiFolder multiFolder = new MultiFolderStub(
                 "User",
                 "1GB",
-                List.of(folder2, folder3)
+                List.of(folder1, folder2, folder3)
+        );
+
+        MultiFolder multiFolder2 = new MultiFolderStub(
+                "PC",
+                "2GB",
+                List.of(multiFolder,folder4)
         );
 
         fileCabinet = new FileCabinet(
                 List.of(
-                        folder2,
-                        folder1,
-                        multiFolder
+                        multiFolder2
                 )
         );
     }
@@ -78,6 +83,6 @@ public class FileCabinetTest {
 
     @Test
     void testCount() {
-        assertEquals(3, fileCabinet.count());
+        assertEquals(6, fileCabinet.count());
     }
 }
