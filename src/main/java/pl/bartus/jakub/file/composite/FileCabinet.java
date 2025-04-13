@@ -13,14 +13,12 @@ public class FileCabinet implements Cabinet {
 
     @Override
     public Optional<Folder> findFolderByName(String name) {
-        return filter(folder -> folder.getName().equalsIgnoreCase(name))
-                .findFirst();
+        return filter(folder -> folder.getName().equalsIgnoreCase(name)).findFirst();
     }
 
     @Override
     public List<Folder> findFoldersBySize(String size) {
-        return filter(folder -> folder.getSize().equalsIgnoreCase(size))
-                .toList();
+        return filter(folder -> folder.getSize().equalsIgnoreCase(size)).toList();
     }
 
     @Override
